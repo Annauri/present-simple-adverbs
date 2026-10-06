@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Present Simple &amp; Adverbs of Frequency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f6fa;--card:#ffffff;--ink:#0f172a;--ink2:#334155;--muted:#64748b;--line:#e6e8f0;--soft:#f8fafc;
+  --a1:#4f46e5;--a2:#7c3aed;--a3:#06b6d4;--ok:#10b981;--bad:#ef4444;
+  --shadow:0 1px 2px rgba(15,23,42,.04),0 10px 30px -8px rgba(15,23,42,.10);
+  --r:22px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--ink);overflow:hidden;-webkit-font-smoothing:antialiased;line-height:1.5}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(900px 500px at 90% -10%,rgba(124,58,237,.10),transparent 60%),
+             radial-gradient(800px 500px at -10% 110%,rgba(6,182,212,.10),transparent 60%);}
+button{font:inherit;color:inherit}
+.app{position:relative;z-index:1;display:flex;flex-direction:column;height:100vh;height:100dvh}
+
+/* Top bar */
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 24px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;min-width:0}
+.logo{width:34px;height:34px;flex:none;border-radius:11px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:13px;background:linear-gradient(135deg,var(--a1),var(--a2));box-shadow:0 6px 16px -6px rgba(79,70,229,.6)}
+.section{color:var(--muted);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.counter{flex:none;font-variant-numeric:tabular-nums;font-size:13px;font-weight:600;color:var(--ink2);background:#fff;border:1px solid var(--line);padding:6px 12px;border-radius:999px;box-shadow:var(--shadow)}
+
+/* Deck */
+.deck{flex:1;position:relative;overflow:hidden}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;overflow-y:auto;padding:8px 24px 28px;opacity:0;visibility:hidden;transform:translateX(48px);transition:opacity .5s ease,transform .6s cubic-bezier(.2,.7,.2,1),visibility .5s}
+.slide.prev{transform:translateX(-48px)}
+.slide.active{opacity:1;visibility:visible;transform:none}
+.slide-inner{margin:auto;width:100%;max-width:1060px;display:flex;flex-direction:column;gap:18px;padding:12px 0}
+.slide.active .slide-inner>*{animation:rise .65s cubic-bezier(.2,.7,.2,1) both}
+.slide.active .slide-inner>*:nth-child(2){animation-delay:.08s}
+.slide.active .slide-inner>*:nth-child(3){animation-delay:.16s}
+.slide.active .slide-inner>*:nth-child(4){animation-delay:.24s}
+.slide.active .slide-inner>*:nth-child(5){animation-delay:.32s}
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* Type */
+.eyebrow{display:inline-flex;align-self:flex-start;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--a1);background:rgba(79,70,229,.08);border:1px solid rgba(79,70,229,.15);padding:6px 12px;border-radius:999px}
+h1{font-size:clamp(38px,6.5vw,76px);font-weight:900;letter-spacing:-.035em;line-height:1.02}
+h2{font-size:clamp(28px,4.2vw,46px);font-weight:800;letter-spacing:-.028em;line-height:1.1}
+h3{font-size:19px;font-weight:700;letter-spacing:-.01em;margin-bottom:8px}
+h4{font-size:15px;font-weight:700;margin-bottom:6px}
+.grad{background:linear-gradient(135deg,var(--a1) 0%,var(--a2) 50%,var(--a3) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:clamp(16px,1.7vw,19px);color:var(--muted);max-width:780px}
+p{color:var(--ink2)}
+p+p{margin-top:10px}
+em{font-style:normal;font-weight:600;padding:1px 7px;border-radius:7px;white-space:nowrap}
+em.a{background:#f3e8ff;color:#6d28d9}
+em.v{background:#cffafe;color:#0e7490}
+em.b{background:#ffedd5;color:#c2410c}
+em.s{background:#e0e7ff;color:#4338ca}
+em.x{background:#fee2e2;color:#b91c1c;text-decoration:line-through}
+
+/* Cards & tabs */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:24px}
+.tab-list{display:flex;gap:4px;padding:5px;background:#eef0f6;border-radius:14px;width:fit-content;max-width:100%;overflow-x:auto;margin-bottom:22px;scrollbar-width:none}
+.tab-list::-webkit-scrollbar{display:none}
+.tab-list button{border:0;background:transparent;font-weight:600;font-size:14px;color:var(--muted);padding:9px 16px;border-radius:10px;cursor:pointer;white-space:nowrap;transition:background .2s,color .2s,box-shadow .2s}
+.tab-list button:hover{color:var(--ink)}
+.tab-list button.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(15,23,42,.12)}
+.tab-panel{display:none}
+.tab-panel.on{display:block;animation:fade .4s ease both}
+
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.grid.two{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.mini{padding:18px;border-radius:16px;background:var(--soft);border:1px solid var(--line)}
+.mini .ic{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;margin-bottom:12px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--a1),var(--a2))}
+.mini p{font-size:15px}
+.big-ex{font-size:clamp(18px,2vw,22px);font-weight:600;color:var(--ink)}
+
+.ex{list-style:none;display:grid;gap:10px}
+.ex li{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;border-radius:14px;background:var(--soft);border:1px solid var(--line);font-size:16px}
+.ex li::before{content:"";flex:none;width:8px;height:8px;margin-top:9px;border-radius:50%;background:linear-gradient(135deg,var(--a1),var(--a3))}
+.ex li span.tag{margin-left:auto;font-size:12px;color:var(--muted);font-weight:600;white-space:nowrap;padding-top:2px}
+
+.note{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:14px;margin-top:14px;background:linear-gradient(135deg,rgba(79,70,229,.06),rgba(6,182,212,.06));border:1px solid rgba(79,70,229,.16);font-size:15px;color:var(--ink2)}
+.note b.i{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;color:#fff;background:var(--a1)}
+.warn{background:linear-gradient(135deg,rgba(239,68,68,.06),rgba(245,158,11,.06));border-color:rgba(239,68,68,.2)}
+.warn b.i{background:var(--bad)}
+
+.formula{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:4px 0 16px}
+.f{padding:9px 14px;border-radius:12px;font-weight:700;font-size:15px;font-family:"JetBrains Mono",ui-monospace,monospace}
+.f.s{background:#e0e7ff;color:#4338ca}
+.f.v{background:#cffafe;color:#0e7490}
+.f.a{background:linear-gradient(135deg,var(--a2),var(--a1));color:#fff;box-shadow:0 6px 14px -6px rgba(124,58,237,.6)}
+.f.b{background:#ffedd5;color:#c2410c}
+.f.o{background:#f1f5f9;color:#334155}
+.plus{color:#94a3b8;font-weight:700}
+.legend{display:flex;flex-wrap:wrap;gap:8px;font-size:13px;color:var(--muted)}
+.legend em{font-size:13px}
+
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:16px}
+.tbl{width:100%;border-collapse:collapse;font-size:15px;min-width:520px}
+.tbl th{text-align:left;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700;padding:12px 16px;background:var(--soft);border-bottom:1px solid var(--line)}
+.tbl td{padding:12px 16px;border-bottom:1px solid var(--line);color:var(--ink2)}
+.tbl tr:last-child td{border-bottom:0}
+.tbl tr:hover td{background:#fafbff}
+.tbl td:first-child{font-weight:700;color:var(--ink)}
+.tbl small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+
+/* Scale */
+.scale{display:grid;gap:10px}
+.scale-row{display:grid;grid-template-columns:140px 1fr 56px;gap:14px;align-items:center}
+.scale-row .w{font-weight:700}
+.scale-row .p{text-align:right;font-weight:700;font-variant-numeric:tabular-nums;color:var(--muted);font-family:"JetBrains Mono",monospace;font-size:14px}
+.bar{height:14px;border-radius:99px;background:#eef0f6;overflow:hidden}
+.bar i{display:block;height:100%;width:var(--w);min-width:6px;border-radius:99px;background:linear-gradient(90deg,var(--a3),var(--a1),var(--a2));transform-origin:left}
+.slide.active .bar i{animation:grow 1.1s cubic-bezier(.2,.7,.2,1) both}
+.scale-row:nth-child(3) .bar i{animation-delay:.05s}.scale-row:nth-child(4) .bar i{animation-delay:.1s}.scale-row:nth-child(5) .bar i{animation-delay:.15s}.scale-row:nth-child(6) .bar i{animation-delay:.2s}.scale-row:nth-child(7) .bar i{animation-delay:.25s}.scale-row:nth-child(8) .bar i{animation-delay:.3s}.scale-row:nth-child(9) .bar i{animation-delay:.35s}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.scale-cap{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--a1)}
+.scale-cap.end{color:var(--muted)}
+
+details.chk{border:1px solid var(--line);background:var(--soft);border-radius:14px;padding:12px 16px;margin-bottom:10px}
+details.chk summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+details.chk summary::-webkit-details-marker{display:none}
+details.chk summary::after{content:"Reveal";font-size:12px;font-weight:700;color:var(--a1);background:rgba(79,70,229,.08);padding:3px 10px;border-radius:99px;white-space:nowrap}
+details.chk[open] summary::after{content:"Hide"}
+details.chk p{margin-top:8px;color:var(--a2);font-weight:600}
+
+/* Exercises */
+.ex-head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:16px}
+.score{font-weight:700;font-size:14px;padding:7px 14px;border-radius:99px;background:linear-gradient(135deg,rgba(79,70,229,.1),rgba(6,182,212,.1));color:var(--a1);font-variant-numeric:tabular-nums}
+.q,.ord,.cor{padding:18px;border:1px solid var(--line);border-radius:16px;background:#fff;margin-bottom:12px;transition:border-color .3s,box-shadow .3s}
+.q.done-ok,.ord.ok,.cor.ok{border-color:rgba(16,185,129,.5);box-shadow:0 0 0 4px rgba(16,185,129,.08)}
+.q.done-bad{border-color:rgba(239,68,68,.4)}
+.q-h{display:flex;gap:10px;align-items:center;font-weight:600;margin-bottom:12px;flex-wrap:wrap}
+.num{flex:none;width:28px;height:28px;border-radius:9px;display:grid;place-items:center;font-size:13px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--a1),var(--a2))}
+.src{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--muted);font-weight:500}
+.opts{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.opt{display:flex;gap:10px;align-items:center;text-align:left;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--soft);cursor:pointer;font-size:15px;transition:transform .15s,border-color .2s,background .2s}
+.opt:hover{border-color:#c7cbe0;transform:translateY(-1px)}
+.opt .l{flex:none;width:24px;height:24px;border-radius:7px;display:grid;place-items:center;font-size:12px;font-weight:800;background:#fff;border:1px solid var(--line);color:var(--muted)}
+.opt.right{background:#ecfdf5;border-color:var(--ok);color:#065f46}
+.opt.right .l{background:var(--ok);color:#fff;border-color:var(--ok)}
+.opt.wrong{background:#fef2f2;border-color:var(--bad);color:#991b1b}
+.opt.wrong .l{background:var(--bad);color:#fff;border-color:var(--bad)}
+.opt:disabled{cursor:default;transform:none}
+.zone{min-height:54px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px;border:1.5px dashed #cdd2e3;border-radius:14px;background:#fbfcff;margin-bottom:10px;transition:border-color .2s}
+.zone:empty::before{content:attr(data-ph);color:#a0a8bd;font-size:14px;padding-left:4px}
+.bank{display:flex;flex-wrap:wrap;gap:8px;min-height:10px;margin-bottom:12px}
+.w{padding:8px 13px;border-radius:10px;border:1px solid var(--line);background:#fff;font-weight:600;font-size:15px;cursor:pointer;box-shadow:0 1px 2px rgba(15,23,42,.06);transition:transform .15s,box-shadow .15s,background .2s;animation:fade .25s ease both}
+.w:hover{transform:translateY(-2px);box-shadow:0 6px 14px -6px rgba(15,23,42,.2)}
+.zone .w{background:#eef2ff;border-color:#c7d2fe;color:#3730a3}
+.ord.ok .w{background:#ecfdf5;border-color:#a7f3d0;color:#065f46;cursor:default}
+.row-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.fb{font-size:14px;font-weight:600}
+.fb.good{color:var(--ok)}.fb.badc{color:var(--bad)}
+.result{margin-top:10px;font-weight:600;color:#065f46}
+.wrong-s{font-size:16px;font-weight:600;color:#991b1b;margin-bottom:10px;display:flex;gap:8px;align-items:center}
+.wrong-s::before{content:"✕";flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:11px;color:#fff;background:var(--bad)}
+.inp{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font:inherit;font-size:16px;margin-bottom:10px;background:#fbfcff;transition:border-color .2s,box-shadow .2s}
+.inp:focus{outline:none;border-color:var(--a1);box-shadow:0 0 0 4px rgba(79,70,229,.12)}
+.cor.ok .inp{border-color:var(--ok);background:#ecfdf5}
+.shake{animation:shake .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.key{list-style:none;counter-reset:k;display:grid;gap:8px}
+.key li{counter-increment:k;display:flex;gap:10px;padding:10px 14px;border-radius:12px;background:var(--soft);border:1px solid var(--line)}
+.key li::before{content:counter(k);flex:none;width:24px;height:24px;border-radius:7px;display:grid;place-items:center;font-size:12px;font-weight:800;color:var(--a1);background:rgba(79,70,229,.1)}
+.key li small{color:var(--muted);display:block}
+
+/* Buttons & nav */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:14px;border:1px solid var(--line);background:#fff;font-weight:600;font-size:15px;cursor:pointer;box-shadow:var(--shadow);transition:transform .15s,box-shadow .2s,opacity .2s}
+.btn:hover:not(:disabled){transform:translateY(-1px)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.primary{background:linear-gradient(135deg,var(--a1),var(--a2));color:#fff;border-color:transparent;box-shadow:0 10px 22px -8px rgba(79,70,229,.6)}
+.btn.sm{padding:8px 14px;font-size:14px;border-radius:11px}
+.btn svg{width:18px;height:18px}
+.nav{position:relative;display:flex;align-items:center;gap:16px;padding:14px 24px 18px}
+.progress{position:absolute;top:0;left:24px;right:24px;height:4px;border-radius:99px;background:#e5e7f0;overflow:hidden}
+.progress i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--a3),var(--a1),var(--a2));transition:width .5s cubic-bezier(.2,.7,.2,1)}
+.dots{flex:1;display:flex;justify-content:center;flex-wrap:wrap;gap:6px}
+.dot{width:8px;height:8px;padding:0;border:0;border-radius:99px;background:#d4d8e5;cursor:pointer;transition:width .3s,background .3s}
+.dot:hover{background:#a5acc4}
+.dot.on{width:26px;background:linear-gradient(90deg,var(--a1),var(--a2))}
+.dot.seen:not(.on){background:#b9b5f5}
+.hint-keys{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+kbd{font-family:"JetBrains Mono",monospace;font-size:12px;padding:3px 8px;border-radius:7px;background:#fff;border:1px solid var(--line);box-shadow:0 2px 0 var(--line)}
+
+.hero-badges{display:flex;flex-wrap:wrap;gap:10px}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:99px;background:#fff;border:1px solid var(--line);font-size:14px;font-weight:600;box-shadow:var(--shadow)}
+.badge i{width:8px;height:8px;border-radius:50%;background:var(--a1)}
+.big-num{font-size:44px;font-weight:900;letter-spacing:-.03em}
+
+@media (max-width:720px){
+  .topbar{padding:12px 16px}
+  .section{display:none}
+  .slide{padding:4px 16px 24px}
+  .card{padding:18px;border-radius:18px}
+  .dots{display:none}
+  .nav{padding:12px 16px 16px;justify-content:space-between}
+  .progress{left:16px;right:16px}
+  .scale-row{grid-template-columns:100px 1fr 46px;gap:10px}
+  .scale-row .w{font-size:14px}
+  .btn .t-lbl{display:none}
+  .ex li span.tag{display:none}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><div class="logo">PS</div><span>Present Simple</span><span class="section" id="section">· Introduction</span></div>
+    <div class="counter" id="counter">1 / 1</div>
+  </header>
+
+  <main class="deck" id="deck">
+
+    <!-- 1 -->
+    <section class="slide" data-section="Introduction">
+      <div class="slide-inner">
+        <span class="eyebrow">English Grammar · A2–B1</span>
+        <h1>Present Simple<br><span class="grad">&amp; Adverbs of Frequency</span></h1>
+        <p class="lead">How to form the Present Simple, when to use it, and where to put words like <em class="a">always</em>, <em class="a">often</em> and <em class="a">never</em> in a sentence.</p>
+        <div class="card tabs">
+          <div class="tab-list"><button>Overview</button><button>How to navigate</button></div>
+          <div class="tab-panel">
+            <div class="grid">
+              <div class="mini"><div class="ic">1</div><h4>Theory</h4><p>Form and uses of the Present Simple with examples.</p></div>
+              <div class="mini"><div class="ic">2</div><h4>Adverbs of frequency</h4><p>The scale from <b>always</b> to <b>never</b> and word order rules.</p></div>
+              <div class="mini"><div class="ic">3</div><h4>Practice</h4><p>Four interactive exercises with instant feedback.</p></div>
+            </div>
+          </div>
+          <div class="tab-panel">
+            <div class="grid">
+              <div class="mini"><h4>Keyboard</h4><p class="hint-keys"><kbd>←</kbd><kbd>→</kbd> previous / next slide</p></div>
+              <div class="mini"><h4>Buttons &amp; dots</h4><p>Use <b>Back</b> / <b>Next</b> or click a dot to jump to any slide.</p></div>
+              <div class="mini"><h4>Tabs</h4><p>Every slide has tabs like these — click them to see more.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="slide" data-section="Present Simple · Basics">
+      <div class="slide-inner">
+        <span class="eyebrow">Theory · 01</span>
+        <h2>What is the <span class="grad">Present Simple</span>?</h2>
+        <p class="lead">It is the tense we use to talk about things that are generally true, regular or permanent — not just about this moment.</p>
+        <div class="card tabs">
+          <div class="tab-list"><button>Definition</button><button>Key idea</button><button>Time expressions</button></div>
+          <div class="tab-panel">
+            <p class="big-ex">The Present Simple describes <em class="s">habits</em>, <em class="s">facts</em>, <em class="s">permanent situations</em>, <em class="s">schedules</em> and <em class="s">states</em>.</p>
+            <div class="note"><b class="i">i</b><span>It is one of the most common tenses in English — you use it every day to talk about yourself and the world.</span></div>
+          </div>
+          <div class="tab-panel">
+            <div class="grid two">
+              <div class="mini"><h4>Present Simple</h4><p>I <em class="v">read</em> books every evening. <br><small style="color:var(--muted)">→ a regular habit</small></p></div>
+              <div class="mini"><h4>Not right now</h4><p>The action is not necessarily happening at the moment of speaking — it happens <b>in general</b>.</p></div>
+            </div>
+          </div>
+          <div class="tab-panel">
+            <ul class="ex">
+              <li>every day / every week / every summer</li>
+              <li>on Mondays / at weekends / in the morning</li>
+              <li>once a week / twice a month / three times a year</li>
+              <li>always, usually, often, sometimes, rarely, never</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="slide" data-section="Present Simple · Form">
+      <div class="slide-inner">
+        <span class="eyebrow">Theory · 02</span>
+        <h2>Affirmative <span class="grad">form</span></h2>
+        <p class="lead">We use the base form of the verb. With <b>he, she, it</b> we add <b>-s</b> or <b>-es</b>.</p>
+        <div class="card tabs">
+          <div class="tab-list"><button>I / you / we / they</button><button>he / she / it</button><button>Full table</button></div>
+          <div class="tab-panel">
+            <div class="formula"><span class="f s">I / You / We / They</span><span class="plus">+</span><span class="f v">verb</span></div>
+            <ul class="ex"><li>I <em class="v">work</em> in an office.</li><li>We <em class="v">live</em> in a big city.</li><li>They <em class="v">play</em> tennis on Saturdays.</li></ul>
+          </div>
+          <div class="tab-panel">
+            <div class="formula"><span class="f s">He / She / It</span><span class="plus">+</span><span class="f v">verb + s / es</span></div>
+            <ul class="ex"><li>He <em class="v">works</em> in a hospital.</li><li>She <em class="v">watches</em> TV in the evening.</li><li>It <em class="v">rains</em> a lot in autumn.</li></ul>
+          </div>
+          <div class="tab-panel">
+            <div class="tbl-wrap"><table class="tbl">
+              <tr><th>Subject</th><th>work</th><th>go</th><th>have</th></tr>
+              <tr><td>I / You</td><td>work</td><td>go</td><td>have</td></tr>
+              <tr><td>He / She / It</td><td><em class="v">works</em></td><td><em class="v">goes</em></td><td><em class="v">has</em></td></tr>
+              <tr><td>We / You / They</td><td>work</td><td>go</td><td>have</td></tr>
+            </table></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="slide" data-section="Present Simple · Form">
+      <div class="slide-inner">
+        <span class="eyebrow">Theory · 03</span>
+        <h2>Spelling: <span class="grad">-s, -es, -ies</span></h2>
+        <p class="lead">The third person singular (he / she / it) follows a few simple spelling rules.</p>
+        <div class="card tabs">
+          <div class="tab-list"><button>+ s</button><button>+ es</button><button>y → ies</button><button>Irregular</button></div>
+          <div class="tab-panel">
+            <p>Most verbs just add <b>-s</b>.</p>
+            <div class="grid" style="margin-top:14px"><div class="mini">work → <em class="v">works</em></div><div class="mini">read → <em class="v">reads</em></div><div class="mini">play → <em class="v">plays</em></div><div class="mini">like → <em class="v">likes</em></div></div>
+          </div>
+          <div class="tab-panel">
+            <p>Verbs ending in <b>-s, -ss, -sh, -ch, -x, -o</b> add <b>-es</b>.</p>
+            <div class="grid" style="margin-top:14px"><div class="mini">watch → <em class="v">watches</em></div><div class="mini">wash → <em class="v">washes</em></div><div class="mini">fix → <em class="v">fixes</em></div><div class="mini">miss → <em class="v">misses</em></div><div class="mini">go → <em class="v">goes</em></div><div class="mini">do → <em class="v">does</em></div></div>
+          </div>
+          <div class="tab-panel">
+            <p>Consonant + <b>y</b> → <b>-ies</b>. But vowel + <b>y</b> → just <b>-s</b>.</p>
+            <div class="grid" style="margin-top:14px"><div class="mini">study → <em class="v">studies</em></div><div class="mini">fly → <em class="v">flies</em></div><div class="mini">try → <em class="v">tries</em></div><div class="mini">play → <em class="v">plays</em> <small style="color:var(--muted)">(vowel + y)</small></div></div>
+          </div>
+          <div class="tab-panel">
+            <div class="grid two"><div class="mini"><h4>have</h4><p>I have → she <em class="v">has</em></p></div><div class="mini"><h4>be</h4><p>I am → he <em class="b">is</em> → they <em class="b">are</em></p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="slide" data-section="Present Simple · Form">
+      <div class="slide-inner">
+        <span class="eyebrow">Theory · 04</span>
+        <h2>Negative <span class="grad">form</span></h2>
+        <p class="lead">We use the auxiliary <b>do not (don't)</b> or <b>does not (doesn't)</b> + the base form of the verb.</p>
+        <div class="card tabs">
+          <div class="tab-list"><button>don't</button><button>doesn't</button><button>Examples</button></div>
+          <div class="tab-panel">
+            <div class="formula"><span class="f s">I / You / We / They</span><span class="plus">+</span><span class="f b">don't</span><span class="plus">+</span><span class="f v">verb</span></div>
+            <ul class="ex"><li>I <em class="b">don't</em> <em class="v">like</em> coffee.</li><li>They <em class="b">don't</em> <em class="v">live</em> here.</li></ul>
+          </div>
+          <div class="tab-panel">
+            <div class="formula"><span class="f s">He / She / It</span><span class="plus">+</span><span class="f b">doesn't</span><span class="plus">+</span><span class="f v">verb</span></div>
+            <ul class="ex"><li>She <em class="b">doesn't</em> <em class="v">eat</em> meat.</li><li>He <em class="b">doesn't</em> <em class="v">speak</em> French.</li></ul>
+            <div class="note warn"><b class="i">!</b><span>No <b>-s</b> on the main verb after <b>doesn't</b>: she doesn't <em class="x">eats</em> → she doesn't <em class="v">eat</em>.</span></div>
+          </div>
+          <div class="tab-panel">
+            <ul class="ex"><li>We don't go to school on Sundays.</li><li>My brother doesn't play the guitar.</li><li>It doesn't snow in summer.</li><li>You don't need a ticket.</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 -->
+    <section class="slide" data-section="Present Simple · Form">
+      <div class="slide-inner">
+        <span class="eyebrow">Theory · 05</span>
+        <h2>Questions &amp; <span class="grad">short answers</span></h2>
+        <p class="lead">Questions start with <b>Do</b> or <b>Does</b>. The main verb stays in the base form.</p>
+        <div class="card tabs">
+          <div class="tab-list"><button>Yes / No questions</button><button>Wh- questions</button><button>Short answers</button></div>
+          <div class="tab-panel">
+            <div class="formula"><span class="f b">Do / Does</span><span class="plus">+</span><span class="f s">subject</span><span class="plus">+</span><span class="f v">verb</span><span class="f o">…?</span></div>
+            <ul class="ex"><li><em class="b">Do</em> you <em class="v">like</em> pizza?</li><li><em class="b">Does</em> she <em class="v">work</em> here?</li></ul>
+          </div>
+          <div class="tab-panel">
+            <div class="formula"><span class="f o">Wh-</span><span class="plus">+</span><span class="f b">do / does</span><span class="plus">+</span><span class="f s">subject</span><span class="plus">+</span><span class="f v">verb</span><span class="f o">…?</span></div>
+            <ul class="ex"><li>Where <em class="b">do</em> you <em class="v">live</em>?</li><li>What time <em class="b">does</em> the film <em class="v">start</em>?</li><li>How often <em class="b">do</em> they <em class="v">train</em>?</li></ul>
+          </div>
+          <div class="tab-panel">
+            <div class="tbl-wrap"><table class="tbl">
+              <tr><th>Question</th><th>Yes</th><th>No</th></tr>
+              <tr><td>Do you like tea?</td><td>Yes, I do.</td><td>No, I don't.</td></tr>
+              <tr><td>Does he drive?</td><td>Yes, he does.</td><td>No, he doesn't.</td></tr>
+              <tr><td>Do they live here?</td><td>Yes, they do.</td><td>No, they don't.</td></tr>
+            </table></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 -->
+    <section class="slide" data-section="Present Simple · Form">
+      <div class="slide-inner">
+        <span class="eyebrow">Theory · 06</span>
+        <h2>The verb <span class="grad">to be</span></h2>
+        <p class="lead"><b>To be</b> is special: it has its own forms and never uses <b>do / does</b>.</p>
+        <div class="card tabs">
+          <div class="tab-list"><button>Forms</button><button>Negative</button><button>Questions</button></div>
+          <div class="tab-panel">
+            <div class="grid"><div class="mini"><h4>I</h4><p><em class="b">am</em> — I am a student.</p></div><div class="mini"><h4>He / She / It</h4><p><em class="b">is</em> — She is at home.</p></div><div class="mini"><h4>We / You / They</h4><p><em class="b">are</em> — They are friends.</p></div></div>
+          </div>
+          <div class="tab-panel">
+            <ul class="ex"><li>I <em class="b">am not</em> (I'm not) tired.</li><li>He <em class="b">is not</em> (isn't) busy.</li><li>We <em class="b">are not</em> (aren't) late.</li></ul>
+          </div>
+          <div class="tab-panel">
+            <div class="formula"><span class="f b">Am / Is / Are</span><span class="plus">+</span><span class="f s">subject</span><span class="plus">+</span><span class="f o">…?</span></div>
+            <ul class="ex"><li><em class="b">Are</em> you ready? — Yes, I am.</li><li><em class="b">Is</em> it cold today? — No, it isn't.</li></ul>
+            <div class="note warn"><b class="i">!</b><span><em class="x">Do you are</em> ready? → <em class="b">Are</em> you ready?</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 -->
+    <section class="slide" data-section="Present Simple · Uses">
+      <div class="slide-inner">
+        <span class="eyebrow">Use 1 of 5</span>
+        <h2>Habits &amp; <span class="grad">routines</span></h2>
+        <p class="lead">Actions that we do regularly, again and again.</p>
+        <div class="card tabs">
+          <div class="tab-list"><button>Rule</button><button>Examples</button><button>Signal words</button></div>
+          <div class="tab-panel"><p class="big-ex">We use the Present Simple for things that happen <em class="s">repeatedly</em> — daily routines, hobbies and habits.</p></div>
+          <div class="tab-panel"><ul class="ex"><li>I get up at 7 o'clock every day.<span class="tag">routine</span></li><li>She drinks coffee in the morning.<span class="tag">habit</span></li><li>We play football on Fridays.<span class="tag">hobby</span></li><li>He brushes his teeth twice a day.<span class="tag">routine</span></li></ul></div>
+          <div class="tab-panel"><div class="grid"><div class="mini">every day / week</div><div class="mini">on Mondays</div><div class="mini">at weekends</div><div class="mini">always / usually / often</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 -->
+    <section class="slide" data-section="Present Simple · Uses">
+      <div class="slide-inner">
+        <span class="eyebrow">Use 2 of 5</span>
+        <h2>Facts &amp; <span class="grad">general truths</span></h2>
+        <p class="lead">Things that are always true — in science, nature and life in general.</p>
+        <div class="card tabs">
+          <div class="tab-list"><button>Rule</button><button>Examples</button><button>Science vs. life</button></div>
+          <div class="tab-panel"><p class="big-ex">Facts don't change, so we describe them with the Present Simple.</p></div>
+          <div class="tab-panel"><ul class="ex"><li>Water boils at 100 °C.</li><li>The Earth goes around the Sun.</li><li>Cats have four legs.</li><li>It snows in winter in Russia.</li></ul></div>
+          <div class="tab-panel"><div class="grid two"><div class="mini"><h4>Science</h4><p>Plants need light to grow. Ice melts at 0 °C.</p></div><div class="mini"><h4>Everyday truths</h4><p>Shops close late on Fridays. Babies sleep a lot.</p></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section class="slide" data-section="Present Simple · Uses">
+      <div class="slide-inner">
+        <span class="eyebrow">Use 3 of 5</span>
+        <h2>Permanent <span class="grad">situations</span></h2>
+        <p class="lead">Situations that are true for a long time: where we live, work or study.</p>
+        <div class="card tabs">
+          <div class="tab-list"><button>Rule</button><button>Examples</button><button>Permanent vs. temporary</button></div>
+          <div class="tab-panel"><p class="big-ex">Use the Present Simple for <em class="s">long-term</em> situations that are not likely to change soon.</p></div>
+          <div class="tab-panel"><ul class="ex"><li>My parents live in London.</li><li>He works for a big company.</li><li>She teaches English at a school.</li><li>We study at the same university.</li></ul></div>
+          <div class="tab-panel"><div class="grid two"><div class="mini"><h4>Permanent → Present Simple</h4><p>I <b>live</b> in Moscow.</p></div><div class="mini"><h4>Temporary → Present Continuous</h4><p>I <b>am living</b> with my friend this month.</p></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 -->
+    <section class="slide" data-section="Present Simple · Uses">
+      <div class="slide-inner">
+        <span class="eyebrow">Use 4 of 5</span>
+        <h2>Timetables &amp; <span class="grad">schedules</span></h2>
+        <p class="lead">Official, fixed times — even for the future.</p>
+        <div class="card tabs">
+          <div class="tab-list"><button>Rule</button><button>Examples</button><button>Where you see it</button></div>
+          <div class="tab-panel"><p class="big-ex">For transport, cinemas, lessons and events that follow a <em class="s">timetable</em>, we use the Present Simple.</p></div>
+          <div class="tab-panel"><ul class="ex"><li>The train leaves at 7:15.</li><li>The film starts at 8 p.m.</li><li>Our lesson begins at 9 o'clock tomorrow.</li><li>The museum opens at 10 a.m.</li></ul></div>
+          <div class="tab-panel"><div class="grid"><div class="mini">Train &amp; bus timetables</div><div class="mini">Cinema programmes</div><div class="mini">School timetables</div><div class="mini">Opening hours</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 -->
+    <section class="slide" data-section="Present Simple · Uses">
+      <div class="slide-inner">
+        <span class="eyebrow">Use 5 of 5</span>
+        <h2>Likes, feelings <span class="grad">&amp; states</span></h2>
+        <p class="lead">Stative verbs describe states, not actions. They are usually used in simple tenses.</p>
+        <div class="card tabs">
+          <div class="tab-list"><button>Rule</button><button>Examples</button><button>Stative verbs</button></div>
+          <div class="tab-panel"><p class="big-ex">We use the Present Simple to talk about what we <em class="s">like</em>, <em class="s">think</em>, <em class="s">know</em>, <em class="s">want</em> or <em class="s">have</em>.</p></div>
+          <div class="tab-panel"><ul class="ex"><li>I love chocolate.</li><li>She knows the answer.</li><li>They want a new car.</li><li>I don't understand this word.</li></ul></div>
+          <div class="tab-panel"><div class="grid"><div class="mini"><h4>Feelings</h4><p>like, love, hate, prefer</p></div><div class="mini"><h4>Mind</h4><p>know, think, believe, understand, remember</p></div><div class="mini"><h4>Wants</h4><p>want, need, wish</p></div><div class="mini"><h4>Possession</h4><p>have, own, belong</p></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 -->
+    <section class="slide" data-section="Present Simple · Uses">
+      <div class="slide-inner">
+        <span class="eyebrow">Review</span>
+        <h2>All uses <span class="grad">at a glance</span></h2>
+        <p class="lead">Five reasons to choose the Present Simple.</p>
+        <div class="card tabs">
+          <div class="tab-list"><button>All uses</button><button>Quick check</button></div>
+          <div class="tab-panel">
+            <div class="grid">
+              <div class="mini"><div class="ic">1</div><h4>Habits</h4><p>I walk my dog every morning.</p></div>
+              <div class="mini"><div class="ic">2</div><h4>Facts</h4><p>The Sun rises in the east.</p></div>
+              <div class="mini"><div class="ic">3</div><h4>Permanent</h4><p>She lives in Paris.</p></div>
+              <div class="mini"><div class="ic">4</div><h4>Timetables</h4><p>The bus leaves at 9.</p></div>
+              <div class="mini"><div class="ic">5</div><h4>States</h4><p>I love music.</p></div>
+            </div>
+          </div>
+          <div class="tab-panel">
+            <p style="margin-bottom:12px">Which use is it? Think first, then reveal.</p>
+            <details class="chk"><summary>The concert starts at 7 p.m.</summary><p>Timetable / schedule</p></details>
+            <details class="chk"><summary>He always takes the bus to work.</summary><p>Habit / routine</p></details>
+            <details class="chk"><summary>Bees make honey.</summary><p>Fact / general truth</p></details>
+            <details class="chk"><summary>My aunt works in a bank.</summary><p>Permanent situation</p></details>
+            <details class="chk"><summary>We need some milk.</summary><p>State (stative verb)</p></details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14 -->
+    <section class="slide" data-section="Adverbs of Frequency">
+      <div class="slide-inner">
+        <span class="eyebrow">Adverbs · 01</span>
+        <h2>Adverbs of <span class="grad">frequency</span></h2>
+        <p class="lead">They tell us <b>how often</b> something happens. They are very common with the Present Simple.</p>
+        <div class="card tabs">
+          <div class="tab-list"><button>Definition</button><button>How often?</button><button>Two groups</button></div>
+          <div class="tab-panel">
+            <p class="big-ex">An adverb of frequency answers the question <em class="s">How often…?</em></p>
+            <div class="hero-badges" style="margin-top:16px"><span class="badge"><i></i>always</span><span class="badge"><i></i>usually</span><span class="badge"><i></i>often</span><span class="badge"><i></i>sometimes</span><span class="badge"><i></i>occasionally</span><span class="badge"><i></i>rarely / seldom</span><span class="badge"><i></i>hardly ever</span><span class="badge"><i></i>never</span></div>
+          </div>
+          <div class="tab-panel">
+            <ul class="ex"><li><b>How often</b> do you go to the gym? — I <em class="a">usually</em> go three times a week.</li><li><b>How often</b> does she cook? — She <em class="a">rarely</em> cooks.</li><li><b>How often</b> are they late? — They are <em class="a">never</em> late.</li></ul>
+          </div>
+          <div class="tab-panel">
+            <div class="grid two">
+              <div class="mini"><h4>One-word adverbs</h4><p>always, usually, often, sometimes, never… → go <b>in the middle</b> of the sentence.</p></div>
+              <div class="mini"><h4>Expressions</h4><p>every day, once a week, twice a month… → usually go <b>at the end</b>: I swim <b>twice a week</b>.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15 -->
+    <section class="slide" data-section="Adverbs of Frequency">
+      <div class="slide-inner">
+        <span class="eyebrow">Adverbs · 02</span>
+        <h2>From most to <span class="grad">least frequent</span></h2>
+        <p class="lead">The frequency scale — percentages are approximate.</p>
+        <div class="card tabs">
+          <div class="tab-list"><button>Scale</button><button>Examples</button><button>Note!</button></div>
+          <div class="tab-panel">
+            <div class="scale">
+              <div class="scale-cap">▲ Most frequent</div>
+              <div class="scale-row"><span class="w">always</span><div class="bar"><i style="--w:100%"></i></div><span class="p">100%</span></div>
+              <div class="scale-row"><span class="w">usually</span><div class="bar"><i style="--w:90%"></i></div><span class="p">90%</span></div>
+              <div class="scale-row"><span class="w">often</span><div class="bar"><i style="--w:70%"></i></div><span class="p">70%</span></div>
+              <div class="scale-row"><span class="w">sometimes</span><div class="bar"><i style="--w:50%"></i></div><span class="p">50%</span></div>
+              <div class="scale-row"><span class="w">occasionally</span><div class="bar"><i style="--w:30%"></i></div><span class="p">30%</span></div>
+              <div class="scale-row"><span class="w">rarely / seldom</span><div class="bar"><i style="--w:10%"></i></div><span class="p">10%</span></div>
+              <div class="scale-row"><span class="w">hardly ever</span><div class="bar"><i style="--w:5%"></i></div><span class="p">5%</span></div>
+              <div class="scale-row"><span class="w">never</span><div class="bar"><i style="--w:0%"></i></div><span class="p">0%</span></div>
+              <div class="scale-cap end">▼ Least frequent</div>
+            </div>
+          </div>
+          <div class="tab-panel">
+            <ul class="ex"><li>I <em class="a">always</em> brush my teeth before bed.<span class="tag">100%</span></li><li>We <em class="a">usually</em> have dinner at 7.<span class="tag">90%</span></li><li>She <em class="a">often</em> reads before sleep.<span class="tag">70%</span></li><li>They <em class="a">sometimes</em> eat out.<span class="tag">50%</span></li><li>He <em class="a">rarely</em> watches TV.<span class="tag">10%</span></li><li>I <em class="a">hardly ever</em> drink cola.<span class="tag">5%</span></li><li>My cat <em class="a">never</em> swims.<span class="tag">0%</span></li></ul>
+          </div>
+          <div class="tab-panel">
+            <div class="note warn"><b class="i">!</b><span><b>Never</b>, <b>hardly ever</b>, <b>rarely</b> and <b>seldom</b> already have a negative meaning. Don't use them with <b>not</b>: I <em class="x">don't never</em> eat meat → I <em class="a">never</em> eat meat.</span></div>
+            <div class="note"><b class="i">i</b><span><b>Rarely</b> and <b>seldom</b> mean the same. <b>Seldom</b> is a little more formal.</span></div>
+            <div class="note"><b class="i">i</b><span><b>Hardly ever</b> = almost never. It is two words but works as one adverb.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 16 -->
+    <section class="slide" data-section="Word Order · Statements">
+      <div class="slide-inner">
+        <span class="eyebrow">Word order · 01</span>
+        <h2>Adverb + <span class="grad">main verb</span></h2>
+        <p class="lead">With ordinary (main) verbs, the adverb of frequency goes <b>before</b> the main verb.</p>
+        <div class="card tabs">
+          <div class="tab-list"><button>Rule</button><button>Examples</button><button>Negatives</button></div>
+          <div class="tab-panel">
+            <div class="formula"><span class="f s">Subject</span><span class="plus">+</span><span class="f a">adverb</span><span class="plus">+</span><span class="f v">main verb</span><span class="plus">+</span><span class="f o">…</span></div>
+            <p class="big-ex">She <em class="a">always</em> <em class="v">gets up</em> early.</p>
+            <div class="legend" style="margin-top:14px"><em class="s">subject</em><em class="a">adverb</em><em class="v">main verb</em></div>
+          </div>
+          <div class="tab-panel">
+            <ul class="ex"><li>I <em class="a">usually</em> <em class="v">walk</em> to school.</li><li>He <em class="a">often</em> <em class="v">plays</em> computer games.</li><li>We <em class="a">sometimes</em> <em class="v">visit</em> our grandparents.</li><li>My mum <em class="a">never</em> <em class="v">drinks</em> coffee.</li></ul>
+            <div class="note warn"><b class="i">!</b><span>He <em class="x">plays often</em> games → He <em class="a">often</em> <em class="v">plays</em> games.</span></div>
+          </div>
+          <div class="tab-panel">
+            <div class="formula"><span class="f s">Subject</span><span class="plus">+</span><span class="f b">don't / doesn't</span><span class="plus">+</span><span class="f a">adverb</span><span class="plus">+</span><span class="f v">verb</span></div>
+            <ul class="ex"><li>I <em class="b">don't</em> <em class="a">often</em> <em class="v">eat</em> fast food.</li><li>She <em class="b">doesn't</em> <em class="a">usually</em> <em class="v">work</em> on Saturdays.</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 17 -->
+    <section class="slide" data-section="Word Order · Statements">
+      <div class="slide-inner">
+        <span class="eyebrow">Word order · 02</span>
+        <h2>To be + <span class="grad">adverb</span></h2>
+        <p class="lead">With the verb <b>to be</b> (am / is / are), the adverb goes <b>after</b> the verb.</p>
+        <div class="card tabs">
+          <div class="tab-list"><button>Rule</button><button>Examples</button><button>Negatives</button></div>
+          <div class="tab-panel">
+            <div class="formula"><span class="f s">Subject</span><span class="plus">+</span><span class="f b">am / is / are</span><span class="plus">+</span><span class="f a">adverb</span><span class="plus">+</span><span class="f o">…</span></div>
+            <p class="big-ex">Our teacher <em class="b">is</em> <em class="a">often</em> late.</p>
+            <div class="legend" style="margin-top:14px"><em class="s">subject</em><em class="b">to be</em><em class="a">adverb</em></div>
+          </div>
+          <div class="tab-panel">
+            <ul class="ex"><li>I <em class="b">am</em> <em class="a">always</em> hungry after school.</li><li>She <em class="b">is</em> <em class="a">usually</em> very kind.</li><li>They <em class="b">are</em> <em class="a">sometimes</em> tired.</li><li>It <em class="b">is</em> <em class="a">never</em> hot here in winter.</li></ul>
+            <div class="note warn"><b class="i">!</b><span>She <em class="x">usually is</em> kind → She <em class="b">is</em> <em class="a">usually</em> kind.</span></div>
+          </div>
+          <div class="tab-panel">
+            <div class="formula"><span class="f s">Subject</span><span class="plus">+</span><span class="f b">isn't / aren't / am not</span><span class="plus">+</span><span class="f a">adverb</span></div>
+            <ul class="ex"><li>He <em class="b">isn't</em> <em class="a">usually</em> late.</li><li>We <em class="b">aren't</em> <em class="a">often</em> at home on Fridays.</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 18 -->
+    <section class="slide" data-section="Word Order · Statements">
+      <div class="slide-inner">
+        <span class="eyebrow">Word order · 03</span>
+        <h2>Main verb <span class="grad">vs.</span> to be</h2>
+        <p class="lead">Put the two rules side by side — the difference is easy to remember.</p>
+        <div class="card tabs">
+          <div class="tab-list"><button>Compare</button><button>Memory trick</button><button>Flexible adverbs</button></div>
+          <div class="tab-panel">
+            <div class="grid two">
+              <div class="mini"><h4>Main verbs → BEFORE</h4><p>He <em class="a">often</em> <em class="v">goes</em> to the park.</p><p>They <em class="a">never</em> <em class="v">eat</em> fish.</p></div>
+              <div class="mini"><h4>To be → AFTER</h4><p>He <em class="b">is</em> <em class="a">often</em> in the park.</p><p>They <em class="b">are</em> <em class="a">never</em> hungry.</p></div>
+            </div>
+          </div>
+          <div class="tab-panel">
+            <p class="big-ex">“<b>BE</b> goes first, the adverb follows.<br>Other verbs wait — the adverb goes first.”</p>
+            <div class="note"><b class="i">i</b><span>Think of <b>to be</b> as the leader of the sentence: the adverb always walks behind it.</span></div>
+          </div>
+          <div class="tab-panel">
+            <p><b>Usually, often, sometimes</b> and <b>occasionally</b> can also go at the beginning or end of a sentence for emphasis:</p>
+            <ul class="ex" style="margin-top:12px"><li><em class="a">Sometimes</em> I walk to work.</li><li>I walk to work <em class="a">sometimes</em>.</li></ul>
+            <div class="note warn"><b class="i">!</b><span><b>Always, never, hardly ever, rarely</b> and <b>seldom</b> normally stay in the middle: <em class="x">Always I</em> get up early → I <em class="a">always</em> get up early.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 19 -->
+    <section class="slide" data-section="Word Order · Questions">
+      <div class="slide-inner">
+        <span class="eyebrow">Questions · 01</span>
+        <h2>Questions with <span class="grad">main verbs</span></h2>
+        <p class="lead">The adverb goes <b>after the subject</b> and <b>before the main verb</b>.</p>
+        <div class="card tabs">
+          <div class="tab-list"><button>Rule</button><button>Examples</button><button>ever &amp; How often?</button></div>
+          <div class="tab-panel">
+            <div class="formula"><span class="f b">Do / Does</span><span class="plus">+</span><span class="f s">subject</span><span class="plus">+</span><span class="f a">adverb</span><span class="plus">+</span><span class="f v">main verb</span><span class="f o">…?</span></div>
+            <p class="big-ex"><em class="b">Do</em> you <em class="a">often</em> <em class="v">go</em> to the cinema?</p>
+          </div>
+          <div class="tab-panel">
+            <ul class="ex"><li><em class="b">Does</em> she <em class="a">always</em> <em class="v">walk</em> to school?</li><li><em class="b">Do</em> they <em class="a">usually</em> <em class="v">have</em> lunch at home?</li><li>What <em class="b">do</em> you <em class="a">usually</em> <em class="v">do</em> at weekends?</li></ul>
+            <div class="note warn"><b class="i">!</b><span><em class="x">Do often you</em> play? → <em class="b">Do</em> you <em class="a">often</em> <em class="v">play</em>?</span></div>
+          </div>
+          <div class="tab-panel">
+            <ul class="ex"><li>In questions we use <b>ever</b> (= at any time): <em class="b">Do</em> you <em class="a">ever</em> <em class="v">eat</em> sushi?</li><li>Answer: No, I <em class="a">never</em> eat sushi. / Yes, I <em class="a">sometimes</em> do.</li><li><b>How often</b> <em class="b">does</em> he <em class="v">go</em> swimming?</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 20 -->
+    <section class="slide" data-section="Word Order · Questions">
+      <div class="slide-inner">
+        <span class="eyebrow">Questions · 02</span>
+        <h2>Questions with <span class="grad">to be</span></h2>
+        <p class="lead"><b>Am / Is / Are</b> comes first, then the subject, then the adverb.</p>
+        <div class="card tabs">
+          <div class="tab-list"><button>Rule</button><button>Examples</button><button>Short answers</button></div>
+          <div class="tab-panel">
+            <div class="formula"><span class="f b">Am / Is / Are</span><span class="plus">+</span><span class="f s">subject</span><span class="plus">+</span><span class="f a">adverb</span><span class="plus">+</span><span class="f o">…?</span></div>
+            <p class="big-ex"><em class="b">Is</em> your teacher <em class="a">often</em> late?</p>
+          </div>
+          <div class="tab-panel">
+            <ul class="ex"><li><em class="b">Are</em> you <em class="a">always</em> so busy?</li><li><em class="b">Is</em> he <em class="a">usually</em> at home in the evening?</li><li><em class="b">Are</em> they <em class="a">ever</em> late for class?</li><li>Why <em class="b">is</em> she <em class="a">always</em> so happy?</li></ul>
+            <div class="note warn"><b class="i">!</b><span><em class="x">Is often your teacher</em> late? → <em class="b">Is</em> your teacher <em class="a">often</em> late?</span></div>
+          </div>
+          <div class="tab-panel">
+            <div class="tbl-wrap"><table class="tbl">
+              <tr><th>Question</th><th>Yes</th><th>No</th></tr>
+              <tr><td>Are you usually tired?</td><td>Yes, I am.</td><td>No, I'm not.</td></tr>
+              <tr><td>Is she always on time?</td><td>Yes, she is.</td><td>No, she isn't.</td></tr>
+              <tr><td>Are they ever bored?</td><td>Yes, sometimes.</td><td>No, never.</td></tr>
+            </table></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 21 -->
+    <section class="slide" data-section="Summary">
+      <div class="slide-inner">
+        <span class="eyebrow">Summary</span>
+        <h2>Word order <span class="grad">summary table</span></h2>
+        <p class="lead">Statements and questions with every adverb — main verbs and the verb to be.</p>
+        <div class="card tabs">
+          <div class="tab-list"><button>Main verbs</button><button>To be</button><button>Formulas</button></div>
+          <div class="tab-panel">
+            <div class="tbl-wrap"><table class="tbl">
+              <tr><th>Adverb</th><th>Statement · S + ADV + V</th><th>Question · Do/Does + S + ADV + V?</th></tr>
+              <tr><td>always</td><td>I <em class="a">always</em> <em class="v">walk</em> to school.</td><td>Do you <em class="a">always</em> <em class="v">walk</em> to school?</td></tr>
+              <tr><td>usually</td><td>They <em class="a">usually</em> <em class="v">have</em> lunch at 1.</td><td>Do they <em class="a">usually</em> <em class="v">have</em> lunch at 1?</td></tr>
+              <tr><td>often</td><td>We <em class="a">often</em> <em class="v">visit</em> Grandma.</td><td>Do you <em class="a">often</em> <em class="v">visit</em> Grandma?</td></tr>
+              <tr><td>sometimes</td><td>He <em class="a">sometimes</em> <em class="v">cooks</em> dinner.</td><td>Does he <em class="a">sometimes</em> <em class="v">cook</em> dinner?</td></tr>
+              <tr><td>rarely / seldom</td><td>She <em class="a">rarely</em> <em class="v">eats</em> meat.</td><td>Does she <em class="a">rarely</em> <em class="v">eat</em> meat?</td></tr>
+              <tr><td>hardly ever</td><td>They <em class="a">hardly ever</em> <em class="v">argue</em>.</td><td>Do they <em class="a">ever</em> <em class="v">argue</em>?<small>→ use <b>ever</b> in questions</small></td></tr>
+              <tr><td>never</td><td>I <em class="a">never</em> <em class="v">drink</em> cola.</td><td>Do you <em class="a">ever</em> <em class="v">drink</em> cola?<small>→ use <b>ever</b> in questions</small></td></tr>
+            </table></div>
+          </div>
+          <div class="tab-panel">
+            <div class="tbl-wrap"><table class="tbl">
+              <tr><th>Adverb</th><th>Statement · S + BE + ADV</th><th>Question · BE + S + ADV?</th></tr>
+              <tr><td>always</td><td>She <em class="b">is</em> <em class="a">always</em> on time.</td><td><em class="b">Is</em> she <em class="a">always</em> on time?</td></tr>
+              <tr><td>usually</td><td>He <em class="b">is</em> <em class="a">usually</em> busy.</td><td><em class="b">Is</em> he <em class="a">usually</em> busy?</td></tr>
+              <tr><td>often</td><td>It <em class="b">is</em> <em class="a">often</em> cold here.</td><td><em class="b">Is</em> it <em class="a">often</em> cold here?</td></tr>
+              <tr><td>sometimes</td><td>I <em class="b">am</em> <em class="a">sometimes</em> tired.</td><td><em class="b">Are</em> you <em class="a">sometimes</em> tired?</td></tr>
+              <tr><td>rarely / seldom</td><td>They <em class="b">are</em> <em class="a">rarely</em> ill.</td><td><em class="b">Are</em> they <em class="a">rarely</em> ill?</td></tr>
+              <tr><td>hardly ever</td><td>He <em class="b">is</em> <em class="a">hardly ever</em> angry.</td><td><em class="b">Is</em> he <em class="a">ever</em> angry?<small>→ use <b>ever</b> in questions</small></td></tr>
+              <tr><td>never</td><td>We <em class="b">are</em> <em class="a">never</em> late.</td><td><em class="b">Are</em> you <em class="a">ever</em> late?<small>→ use <b>ever</b> in questions</small></td></tr>
+            </table></div>
+          </div>
+          <div class="tab-panel">
+            <div class="grid two">
+              <div class="mini"><h4>Statement · main verb</h4><div class="formula"><span class="f s">S</span><span class="f a">ADV</span><span class="f v">V</span></div></div>
+              <div class="mini"><h4>Statement · to be</h4><div class="formula"><span class="f s">S</span><span class="f b">BE</span><span class="f a">ADV</span></div></div>
+              <div class="mini"><h4>Question · main verb</h4><div class="formula"><span class="f b">DO/DOES</span><span class="f s">S</span><span class="f a">ADV</span><span class="f v">V?</span></div></div>
+              <div class="mini"><h4>Question · to be</h4><div class="formula"><span class="f b">BE</span><span class="f s">S</span><span class="f a">ADV</span><span class="f o">…?</span></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 22 -->
+    <section class="slide" data-section="Practice">
+      <div class="slide-inner">
+        <span class="eyebrow">Practice</span>
+        <h2>Time to <span class="grad">practise</span></h2>
+        <p class="lead">Four exercises on word order. You get instant feedback and a score for each one.</p>
+        <div class="card tabs">
+          <div class="tab-list"><button>Exercises</button><button>Tips</button></div>
+          <div class="tab-panel">
+            <div class="grid">
+              <div class="mini"><div class="ic">1</div><h4>Which answer is correct?</h4><p>Choose A, B, C or D.</p></div>
+              <div class="mini"><div class="ic">2</div><h4>Put the words in order</h4><p>Build affirmative sentences.</p></div>
+              <div class="mini"><div class="ic">3</div><h4>Make questions</h4><p>Build questions from the words.</p></div>
+              <div class="mini"><div class="ic">4</div><h4>Correct the mistake</h4><p>Rewrite each sentence correctly.</p></div>
+            </div>
+          </div>
+          <div class="tab-panel">
+            <ul class="ex"><li>Find the verb first. Is it <b>to be</b> or a <b>main verb</b>?</li><li>Main verb → adverb <b>before</b> it. To be → adverb <b>after</b> it.</li><li>Questions: <b>Do/Does</b> or <b>Am/Is/Are</b> + subject + adverb.</li><li>Tap a word to add it; tap it again to remove it.</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 23 -->
+    <section class="slide" data-section="Practice · Exercise 1">
+      <div class="slide-inner">
+        <span class="eyebrow">Exercise 1</span>
+        <h2>Which answer <span class="grad">is correct?</span></h2>
+        <div class="card tabs">
+          <div class="tab-list"><button>Exercise</button><button>Hint</button><button>Answer key</button></div>
+          <div class="tab-panel">
+            <div class="ex-head"><span class="score" id="score1">Score: 0 / 0</span><button class="btn sm" data-reset="1">↺ Start again</button></div>
+            <div id="ex1"></div>
+          </div>
+          <div class="tab-panel">
+            <div class="note"><b class="i">i</b><span>Find the verb. With <b>to be</b> the adverb goes after it; with other verbs, before it. In questions, the subject comes straight after <b>Do/Does</b> or <b>Is/Are</b>.</span></div>
+          </div>
+          <div class="tab-panel"><ol class="key" id="key1"></ol></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 24 -->
+    <section class="slide" data-section="Practice · Exercise 2">
+      <div class="slide-inner">
+        <span class="eyebrow">Exercise 2</span>
+        <h2>Put the words in <span class="grad">the correct order</span></h2>
+        <div class="card tabs">
+          <div class="tab-list"><button>Exercise</button><button>Hint</button><button>Answer key</button></div>
+          <div class="tab-panel">
+            <div class="ex-head"><span class="score" id="score2">Score: 0 / 0</span><button class="btn sm" data-reset="2">↺ Start again</button></div>
+            <div id="ex2"></div>
+          </div>
+          <div class="tab-panel">
+            <div class="formula"><span class="f s">Subject</span><span class="plus">+</span><span class="f a">adverb</span><span class="plus">+</span><span class="f v">verb</span><span class="plus">+</span><span class="f o">object</span><span class="plus">+</span><span class="f o">place / time</span></div>
+            <div class="note"><b class="i">i</b><span>Place and time expressions (in the park, on Sunday, at weekends) usually go at the end.</span></div>
+          </div>
+          <div class="tab-panel"><ol class="key" id="key2"></ol></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 25 -->
+    <section class="slide" data-section="Practice · Exercise 3">
+      <div class="slide-inner">
+        <span class="eyebrow">Exercise 3</span>
+        <h2>Make <span class="grad">questions</span></h2>
+        <div class="card tabs">
+          <div class="tab-list"><button>Exercise</button><button>Hint</button><button>Answer key</button></div>
+          <div class="tab-panel">
+            <div class="ex-head"><span class="score" id="score3">Score: 0 / 0</span><button class="btn sm" data-reset="3">↺ Start again</button></div>
+            <div id="ex3"></div>
+          </div>
+          <div class="tab-panel">
+            <div class="grid two">
+              <div class="mini"><h4>Main verb</h4><div class="formula"><span class="f o">(Wh-)</span><span class="f b">Do/Does</span><span class="f s">S</span><span class="f a">ADV</span><span class="f v">V?</span></div></div>
+              <div class="mini"><h4>To be</h4><div class="formula"><span class="f o">(Wh-)</span><span class="f b">Am/Is/Are</span><span class="f s">S</span><span class="f a">ADV</span><span class="f o">…?</span></div></div>
+            </div>
+          </div>
+          <div class="tab-panel"><ol class="key" id="key3"></ol></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 26 -->
+    <section class="slide" data-section="Practice · Exercise 4">
+      <div class="slide-inner">
+        <span class="eyebrow">Exercise 4</span>
+        <h2>Correct <span class="grad">the mistake</span></h2>
+        <div class="card tabs">
+          <div class="tab-list"><button>Exercise</button><button>Hint</button><button>Answer key</button></div>
+          <div class="tab-panel">
+            <div class="ex-head"><span class="score" id="score4">Score: 0 / 0</span><button class="btn sm" data-reset="4">↺ Start again</button></div>
+            <div id="ex4"></div>
+          </div>
+          <div class="tab-panel">
+            <div class="note"><b class="i">i</b><span>Edit the sentence in the box and press <b>Check</b> (or Enter). Most mistakes are about word order — but one sentence has a problem with the <b>-s</b> ending!</span></div>
+          </div>
+          <div class="tab-panel"><ol class="key" id="key4"></ol></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 27 -->
+    <section class="slide" data-section="Finish">
+      <div class="slide-inner">
+        <span class="eyebrow">Finish</span>
+        <h1>Well <span class="grad">done!</span></h1>
+        <p class="lead">You now know how to form the Present Simple and where to put adverbs of frequency.</p>
+        <div class="card tabs">
+          <div class="tab-list"><button>Key rules</button><button>Your results</button><button>Homework</button></div>
+          <div class="tab-panel">
+            <ul class="ex">
+              <li>He / she / it → verb + <b>-s / -es</b>.</li>
+              <li>Main verbs: adverb <b>before</b> the verb — She <em class="a">often</em> <em class="v">reads</em>.</li>
+              <li>To be: adverb <b>after</b> the verb — She <em class="b">is</em> <em class="a">often</em> late.</li>
+              <li>Questions: <b>Do/Does</b> or <b>Am/Is/Are</b> + subject + adverb.</li>
+              <li>Use <b>ever</b> in questions; don't use <b>never</b> with <b>not</b>.</li>
+            </ul>
+          </div>
+          <div class="tab-panel">
+            <div class="grid" id="results"></div>
+          </div>
+          <div class="tab-panel">
+            <p class="big-ex">Write 8 sentences about your week — one with each adverb from the scale.</p>
+            <div class="note"><b class="i">i</b><span>Then write 4 questions to ask a classmate: “Do you ever…?”, “Are you usually…?”, “How often do you…?”</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="nav">
+    <div class="progress"><i id="bar"></i></div>
+    <button class="btn" id="prev" aria-label="Previous slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg><span class="t-lbl">Back</span></button>
+    <div class="dots" id="dots"></div>
+    <button class="btn primary" id="next" aria-label="Next slide"><span class="t-lbl" id="nextLbl">Next</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+  </footer>
+</div>
+
+<script>
+(function(){
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
+
+  /* ---------- Tabs ---------- */
+  function initTabs(root){
+    $$('.tabs', root).forEach(t => {
+      const btns = $$(':scope > .tab-list > button', t);
+      const panels = $$(':scope > .tab-panel', t);
+      const show = i => {
+        btns.forEach((b, j) => { b.classList.toggle('on', i === j); b.setAttribute('aria-selected', i === j); });
+        panels.forEach((p, j) => p.classList.toggle('on', i === j));
+      };
+      btns.forEach((b, i) => { b.type = 'button'; b.setAttribute('role', 'tab'); b.addEventListener('click', () => show(i)); });
+      show(0);
+    });
+  }
+  initTabs(document);
+
+  /* ---------- Navigation ---------- */
+  const slides = $$('.slide');
+  const total = slides.length;
+  const dots = $('#dots'), bar = $('#bar'), counter = $('#counter'), section = $('#section');
+  const prevBtn = $('#prev'), nextBtn = $('#next'), nextLbl = $('#nextLbl');
+  let cur = 0;
+
+  slides.forEach((s, i) => {
+    const d = el('button', 'dot');
+    d.type = 'button';
+    d.title = 'Slide ' + (i + 1) + ' · ' + (s.dataset.section || '');
+    d.setAttribute('aria-label', d.title);
+    d.addEventListener('click', () => go(i));
+    dots.appendChild(d);
+  });
+  const dotEls = $$('.dot', dots);
+
+  function go(i){
+    if (i < 0 || i >= total) return;
+    slides.forEach((s, j) => { s.classList.toggle('prev', j < i); s.classList.remove('active'); });
+    void slides[i].offsetWidth;
+    slides[i].classList.add('active');
+    slides[i].scrollTop = 0;
+    cur = i;
+    dotEls.forEach((d, j) => { d.classList.toggle('on', j === i); if (j <= i) d.classList.add('seen'); });
+    bar.style.width = ((i + 1) / total * 100) + '%';
+    counter.textContent = (i + 1) + ' / ' + total;
+    section.textContent = '· ' + (slides[i].dataset.section || '');
+    prevBtn.disabled = i === 0;
+    nextLbl.textContent = i === total - 1 ? 'Restart' : 'Next';
+  }
+  prevBtn.addEventListener('click', () => go(cur - 1));
+  nextBtn.addEventListener('click', () => go(cur === total - 1 ? 0 : cur + 1));
+
+  document.addEventListener('keydown', e => {
+    const tag = e.target.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+    if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); go(cur + 1); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); go(cur - 1); }
+    else if (e.key === 'Home') go(0);
+    else if (e.key === 'End') go(total - 1);
+  });
+
+  let tx = 0, ty = 0;
+  const deck = $('#deck');
+  deck.addEventListener('touchstart', e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
+  deck.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+    if (Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 1.6) go(dx < 0 ? cur + 1 : cur - 1);
+  }, { passive: true });
+
+  /* ---------- Helpers ---------- */
+  function norm(s){
+    return s.toLowerCase()
+      .replace(/[\u2019\u2018`]/g, "'")
+      .replace(/[.,!?;:]/g, ' ')
+      .replace(/\bi'm\b/g, 'i am')
+      .replace(/\b(he|she|it)'s\b/g, '$1 is')
+      .replace(/\b(we|you|they)'re\b/g, '$1 are')
+      .replace(/\bisn't\b/g, 'is not').replace(/\baren't\b/g, 'are not')
+      .replace(/\bdoesn't\b/g, 'does not').replace(/\bdon't\b/g, 'do not')
+      .replace(/\s+/g, ' ').trim();
+  }
+  const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+
+  const score = { 1: 0, 2: 0, 3: 0, 4: 0 };
+  const totals = { 1: 0, 2: 0, 3: 0, 4: 0 };
+  const names = { 1: 'Which answer is correct?', 2: 'Word order', 3: 'Questions', 4: 'Correct the mistake' };
+  function updateScore(n){
+    $('#score' + n).textContent = 'Score: ' + score[n] + ' / ' + totals[n];
+    const r = $('#results'); r.innerHTML = '';
+    let s = 0, t = 0;
+    [1, 2, 3, 4].forEach(k => {
+      s += score[k]; t += totals[k];
+      r.appendChild(el('div', 'mini', '<h4>Exercise ' + k + '</h4><p style="color:var(--muted);font-size:14px">' + names[k] + '</p><div class="big-num grad">' + score[k] + '<span style="font-size:22px;color:var(--muted);-webkit-text-fill-color:var(--muted)"> / ' + totals[k] + '</span></div>'));
+    });
+    r.appendChild(el('div', 'mini', '<h4>Total</h4><p style="color:var(--muted);font-size:14px">All exercises</p><div class="big-num grad">' + Math.round(t ? s / t * 100 : 0) + '%</div>'));
+  }
+
+  /* ---------- Data ---------- */
+  const EX1 = [
+    { o: ['Our teacher is often late.', 'Our teacher often is late.', 'Is often our teacher late?', 'Often our teacher is late.'], a: 0 },
+    { o: ['She drinks usually tea.', 'She usually drinks tea.', 'Usually drinks she tea.', 'She usually is drink tea.'], a: 1 },
+    { o: ['Do you often play chess?', 'Do often you play chess?', 'Often do you play chess?', 'You do often play chess?'], a: 0 },
+    { o: ['They never are at home.', 'They are at home never.', 'They are never at home.', 'Never they are at home.'], a: 2 },
+    { o: ['Is always he so busy?', 'Is he always so busy?', 'Always is he so busy?', 'He always is so busy?'], a: 1 },
+    { o: ['I eat hardly ever fast food.', 'Hardly ever I eat fast food.', 'I hardly eat ever fast food.', 'I hardly ever eat fast food.'], a: 3 },
+    { o: ['Does sometimes your mum work late?', 'Does your mum sometimes work late?', 'Sometimes does your mum work late?', 'Does your mum work sometimes late?'], a: 1 },
+    { o: ['We seldom are bored.', 'Seldom we are bored.', 'We are seldom bored.', 'We are bored seldom.'], a: 2 }
+  ];
+
+  const EX2 = [
+    { w: 'always / the / Sunday / make / on / they / breakfast', a: ['they always make the breakfast on sunday', 'on sunday they always make the breakfast'] },
+    { w: 'friends / plays / the / with / she / her / in / often / park', a: ['she often plays with her friends in the park', 'in the park she often plays with her friends'] },
+    { w: 'bed / makes / he / his / never', a: ['he never makes his bed'] },
+    { w: 'sometimes / on / play / we / Sunday / cards', a: ['we sometimes play cards on sunday', 'sometimes we play cards on sunday', 'on sunday we sometimes play cards', 'we play cards on sunday sometimes'] },
+    { w: 'hardly / the / watch / they / TV / afternoon / ever / in', a: ['they hardly ever watch tv in the afternoon', 'in the afternoon they hardly ever watch tv'] },
+    { w: "o'clock / always / up / I / at / get / seven", a: ["i always get up at seven o'clock"] },
+    { w: 'have / lunch / fish / seldom / for / we', a: ['we seldom have fish for lunch'] },
+    { w: 'rarely / bus / work / by / to / go / they', a: ['they rarely go to work by bus'] },
+    { w: 'reads / sister / the / my / newspaper / often', a: ['my sister often reads the newspaper'] },
+    { w: 'weekends / usually / boys / football / the / at / play', a: ['the boys usually play football at weekends', 'at weekends the boys usually play football', 'usually the boys play football at weekends'] }
+  ];
+
+  const EX3 = [
+    { w: 'you / do / often / cinema / go / the / to / ?', a: ['do you often go to the cinema'] },
+    { w: 'always / is / he / late / ?', a: ['is he always late'] },
+    { w: 'does / usually / she / what / breakfast / for / have / ?', a: ['what does she usually have for breakfast'] },
+    { w: 'they / are / happy / usually / ?', a: ['are they usually happy'] },
+    { w: 'ever / do / you / coffee / drink / ?', a: ['do you ever drink coffee'] },
+    { w: 'how / you / often / do / exercise / ?', a: ['how often do you exercise'] },
+    { w: 'your / does / ever / brother / cook / ?', a: ['does your brother ever cook'] },
+    { w: 'is / sometimes / the / crowded / bus / ?', a: ['is the bus sometimes crowded'] },
+    { w: 'often / at / you / are / home / weekends / at / ?', a: ['are you often at home at weekends'] },
+    { w: 'Tom / does / walk / always / school / to / ?', a: ['does tom always walk to school'] }
+  ];
+
+  const EX4 = [
+    { s: 'She goes always to school by bus.', fix: 'She always goes to school by bus.' },
+    { s: 'They are late never.', fix: 'They are never late.' },
+    { s: 'I sometimes am tired after work.', fix: 'I am sometimes tired after work.' },
+    { s: 'Does often he play tennis?', fix: 'Does he often play tennis?' },
+    { s: 'We watch usually TV in the evening.', fix: 'We usually watch TV in the evening.' },
+    { s: 'Is always she happy?', fix: 'Is she always happy?' },
+    { s: 'My dad never drink coffee.', fix: 'My dad never drinks coffee.' },
+    { s: 'Do you go ever to the gym?', fix: 'Do you ever go to the gym?' },
+    { s: 'He hardly ever is at home.', fix: 'He is hardly ever at home.' },
+    { s: 'Always I get up early.', fix: 'I always get up early.' }
+  ];
+
+  /* ---------- Exercise 1: multiple choice ---------- */
+  function renderEx1(){
+    const box = $('#ex1'); box.innerHTML = '';
+    score[1] = 0; totals[1] = EX1.length;
+    EX1.forEach((it, i) => {
+      const q = el('div', 'q', '<div class="q-h"><span class="num">' + (i + 1) + '</span>Choose the correct sentence.</div><div class="opts"></div><div class="fb" style="margin-top:10px"></div>');
+      const opts = $('.opts', q), fb = $('.fb', q);
+      it.o.forEach((t, j) => {
+        const b = el('button', 'opt', '<span class="l">' + 'ABCD'[j] + '</span><span>' + t + '</span>');
+        b.type = 'button';
+        b.addEventListener('click', () => {
+          const all = $$('.opt', q);
+          all.forEach(x => x.disabled = true);
+          all[it.a].classList.add('right');
+          if (j === it.a) { score[1]++; q.classList.add('done-ok'); fb.className = 'fb good'; fb.textContent = '✓ Correct!'; }
+          else { b.classList.add('wrong'); q.classList.add('done-bad'); fb.className = 'fb badc'; fb.textContent = '✕ The correct answer is ' + 'ABCD'[it.a] + '.'; }
+          updateScore(1);
+        });
+        opts.appendChild(b);
+      });
+      box.appendChild(q);
+    });
+    $('#key1').innerHTML = EX1.map(it => '<li><span><b>' + 'ABCD'[it.a] + '.</b> ' + it.o[it.a] + '</span></li>').join('');
+    updateScore(1);
+  }
+
+  /* ---------- Exercises 2 & 3: word order builder ---------- */
+  function renderOrder(n, data, isQ){
+    const box = $('#ex' + n); box.innerHTML = '';
+    score[n] = 0; totals[n] = data.length;
+    data.forEach((it, i) => {
+      const words = it.w.split(' / ');
+      const d = el('div', 'ord',
+        '<div class="q-h"><span class="num">' + (i + 1) + '</span><span class="src">' + it.w + '</span></div>' +
+        '<div class="zone" data-ph="Tap the words in the correct order…"></div>' +
+        '<div class="bank"></div>' +
+        '<div class="row-actions"><button type="button" class="btn sm primary chk">Check</button><button type="button" class="btn sm clr">Clear</button><span class="fb"></span></div>');
+      const zone = $('.zone', d), bank = $('.bank', d), fb = $('.fb', d);
+      let solved = false;
+
+      const sortBank = () => $$('.w', bank).sort((a, b) => a.dataset.i - b.dataset.i).forEach(c => bank.appendChild(c));
+      words.forEach((w, k) => {
+        const c = el('button', 'w', w);
+        c.type = 'button'; c.dataset.i = k;
+        c.addEventListener('click', () => {
+          if (solved) return;
+          if (c.parentElement === bank) zone.appendChild(c); else { bank.appendChild(c); sortBank(); }
+          fb.textContent = '';
+        });
+        bank.appendChild(c);
+      });
+
+      $('.clr', d).addEventListener('click', () => { if (solved) return; $$('.w', zone).forEach(c => bank.appendChild(c)); sortBank(); fb.textContent = ''; });
+      $('.chk', d).addEventListener('click', () => {
+        if (solved) return;
+        if (bank.children.length) { fb.className = 'fb badc'; fb.textContent = 'Use all the words.'; return; }
+        const text = $$('.w', zone).map(c => c.textContent).join(' ');
+        if (it.a.includes(norm(text))) {
+          solved = true; score[n]++; d.classList.add('ok');
+          fb.className = 'fb good'; fb.textContent = '✓ Correct!';
+          d.appendChild(el('div', 'result', cap(text) + (isQ ? '?' : '.')));
+          $('.chk', d).disabled = true; $('.clr', d).disabled = true;
+          updateScore(n);
+        } else {
+          fb.className = 'fb badc'; fb.textContent = 'Not quite — try again.';
+          d.classList.remove('shake'); void d.offsetWidth; d.classList.add('shake');
+        }
+      });
+      box.appendChild(d);
+    });
+    $('#key' + n).innerHTML = data.map(it => {
+      const first = it.a[0];
+      const orig = it.w.split(' / ');
+      const pretty = first.split(' ').map(w => orig.find(o => o.toLowerCase() === w) || w).join(' ');
+      return '<li><span>' + cap(pretty) + (isQ ? '?' : '.') + (it.a.length > 1 ? '<small>Other correct orders are also accepted.</small>' : '') + '</span></li>';
+    }).join('');
+    updateScore(n);
+  }
+
+  /* ---------- Exercise 4: correct the mistake ---------- */
+  function renderEx4(){
+    const box = $('#ex4'); box.innerHTML = '';
+    score[4] = 0; totals[4] = EX4.length;
+    EX4.forEach((it, i) => {
+      const d = el('div', 'cor',
+        '<div class="q-h"><span class="num">' + (i + 1) + '</span>Find and correct the mistake.</div>' +
+        '<div class="wrong-s"></div>' +
+        '<input class="inp" type="text" autocomplete="off" autocapitalize="sentences" spellcheck="false" aria-label="Corrected sentence">' +
+        '<div class="row-actions"><button type="button" class="btn sm primary chk">Check</button><button type="button" class="btn sm show">Show answer</button><span class="fb"></span></div>');
+      $('.wrong-s', d).textContent = it.s;
+      const inp = $('.inp', d), fb = $('.fb', d);
+      inp.value = it.s;
+      let done = false;
+      const check = () => {
+        if (done) return;
+        if (norm(inp.value) === norm(it.fix)) {
+          done = true; score[4]++; d.classList.add('ok'); inp.readOnly = true;
+          fb.className = 'fb good'; fb.textContent = '✓ Correct!';
+          $('.chk', d).disabled = true; $('.show', d).disabled = true;
+          updateScore(4);
+        } else {
+          fb.className = 'fb badc';
+          fb.textContent = norm(inp.value) === norm(it.s) ? 'Change something first.' : 'Not quite — try again.';
+          d.classList.remove('shake'); void d.offsetWidth; d.classList.add('shake');
+        }
+      };
+      $('.chk', d).addEventListener('click', check);
+      inp.addEventListener('keydown', e => { if (e.key === 'Enter') check(); });
+      $('.show', d).addEventListener('click', () => {
+        if (done) return;
+        done = true; inp.value = it.fix; inp.readOnly = true;
+        fb.className = 'fb'; fb.style.color = 'var(--muted)'; fb.textContent = 'Answer shown (no point).';
+        $('.chk', d).disabled = true; $('.show', d).disabled = true;
+      });
+      box.appendChild(d);
+    });
+    $('#key4').innerHTML = EX4.map(it => '<li><span>' + it.fix + '<small>✕ ' + it.s + '</small></span></li>').join('');
+    updateScore(4);
+  }
+
+  const renderers = { 1: renderEx1, 2: () => renderOrder(2, EX2, false), 3: () => renderOrder(3, EX3, true), 4: renderEx4 };
+  [1, 2, 3, 4].forEach(n => renderers[n]());
+  $$('[data-reset]').forEach(b => b.addEventListener('click', () => renderers[b.dataset.reset]()));
+
+  go(0);
+})();
+</script>
+</body>
+</html>
